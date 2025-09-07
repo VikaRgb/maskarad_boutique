@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASKARAD_BOUTIQUE - Преміальна мода з Італії та Китаю</title>
+    <style>
+        /* Converting Tailwind design tokens to CSS custom properties */
+        :root {
+            /* Updated color tokens for luxury boutique aesthetic */
+            --background: oklch(1 0 0); /* Pure White */
+            --foreground: oklch(0.25 0 0); /* Charcoal Gray */
+            --card: oklch(0.99 0.02 85); /* Soft Cream */
+            --card-foreground: oklch(0.25 0 0); /* Charcoal Gray */
+            --primary: oklch(0.65 0.15 45); /* Amber-600 for luxury accent */
+            --primary-foreground: oklch(1 0 0); /* White text on primary */
+            --secondary: oklch(0.75 0.12 55); /* Golden yellow accent */
+            --secondary-foreground: oklch(1 0 0); /* White text on secondary */
+            --muted: oklch(0.99 0.02 85); /* Soft Cream for muted elements */
+            --muted-foreground: oklch(0.45 0 0); /* Muted gray text */
+            --accent: oklch(0.65 0.15 45); /* Amber accent */
+            --accent-foreground: oklch(1 0 0); /* White text on accent */
+            --border: oklch(0.92 0.01 85); /* Light cream border */
+            --input: oklch(0.99 0.02 85); /* Soft cream input background */
+            --ring: oklch(0.65 0.15 45 / 0.5); /* Amber ring for focus */
+            --radius: 0.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Converting Tailwind header styles to CSS */
+        .header {
+            border-bottom: 1px solid var(--border);
+            background-color: color-mix(in oklch, var(--card) 50%, transparent);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: var(--primary);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            color: var(--muted-foreground);
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--primary);
+        }
+
+        /* Converting hero section styles */
+        .hero {
+            background: linear-gradient(135deg, var(--card), var(--background), var(--muted));
+            padding: 4rem 0 6rem;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--muted);
+            color: var(--foreground);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            width: fit-content;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            line-height: 1.2;
+            text-wrap: balance;
+        }
+
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 3.75rem;
+            }
+        }
+
+        .text-primary {
+            color: var(--primary);
+        }
+
+        .text-secondary {
+            color: var(--secondary);
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--muted-foreground);
+            line-height: 1.6;
+            text-wrap: pretty;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .button-group {
+                flex-direction: row;
+            }
+        }
+
+        .btn {
+            padding: 1.5rem 2rem;
+            font-size: 1.125rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--foreground);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--muted);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .image-container {
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
+        }
+
+        /* Converting categories section styles */
+        .categories {
+            padding: 4rem 0 6rem;
+            background-color: color-mix(in oklch, var(--muted) 30%, transparent);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-wrap: balance;
+        }
+
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        .section-description {
+            font-size: 1.25rem;
+            color: var(--muted-foreground);
+            max-width: 32rem;
+            margin: 0 auto;
+            text-wrap: pretty;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .categories-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .category-card {
+            background-color: var(--card);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .category-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .category-card:hover .category-title {
+            color: var(--primary);
+        }
+
+        .category-description {
+            color: var(--muted-foreground);
+        }
+
+        /* Converting featured section styles */
+        .featured {
+            padding: 4rem 0 6rem;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .featured-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .feature-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background-color: var(--primary);
+        }
+
+        .feature-dot.secondary {
+            background-color: var(--secondary);
+        }
+
+        /* Converting CTA section styles */
+        .cta {
+            padding: 4rem 0 6rem;
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 48rem;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: bold;
+            text-wrap: balance;
+        }
+
+        @media (min-width: 768px) {
+            .cta-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            text-wrap: pretty;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (min-width: 640px) {
+            .cta-buttons {
+                flex-direction: row;
+            }
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--secondary-foreground);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Converting footer styles */
+        .footer {
+            border-top: 1px solid var(--border);
+            background-color: color-mix(in oklch, var(--card) 50%, transparent);
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            letter-spacing: 0.1em;
+        }
+
+        .footer-description {
+            color: var(--muted-foreground);
+            max-width: 24rem;
+            margin: 0 auto;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            padding-top: 1rem;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">MASKARAD_BOUTIQUE</a>
+                <div class="social-links">
+                    <a href="#" class="social-link">📷</a>
+                    <a href="#" class="social-link">🎵</a>
+                    <a href="#" class="social-link">💬</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div>
+                        <span class="badge">Оновлення кожні 3 дні</span>
+                        <h1 class="hero-title">
+                            Преміальна мода з <span class="text-primary">Італії</span> та
+                            <span class="text-secondary">Китаю</span>
+                        </h1>
+                        <p class="hero-description">
+                            Ексклюзивний одяг, сумки, взуття та аксесуари від найкращих виробників. Ми працюємо з преміальною
+                            Італією та люксовим Китаєм.
+                        </p>
+                    </div>
+                    <div class="button-group">
+                        <a href="#" class="btn btn-primary">Переглянути колекцію</a>
+                        <a href="#" class="btn btn-outline">Зв'язатися з нами</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-container">
+                        <img src="./maskarad-first.jpg" alt="MASKARAD_BOUTIQUE Fashion" class="hero-img">
+                        <div class="image-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Наші категорії</h2>
+                <p class="section-description">
+                    Відкрийте для себе найкращі колекції преміального одягу та аксесуарів
+                </p>
+            </div>
+
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">👗</div>
+                    <h3 class="category-title">Одяг</h3>
+                    <p class="category-description">Преміальні колекції з Італії</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">👜</div>
+                    <h3 class="category-title">Сумки</h3>
+                    <p class="category-description">Люксові аксесуари</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">👠</div>
+                    <h3 class="category-title">Взуття</h3>
+                    <p class="category-description">Італійська якість</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">💎</div>
+                    <h3 class="category-title">Аксесуари</h3>
+                    <p class="category-description">Стильні доповнення</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Image Section -->
+    <section class="featured">
+        <div class="container">
+            <div class="featured-grid">
+                <div class="hero-image">
+                    <div class="image-container">
+                        <img src="./maskarad-second.jpg" alt="MASKARAD_BOUTIQUE Style" class="hero-img">
+                        <div class="image-overlay"></div>
+                    </div>
+                </div>
+                <div class="hero-content">
+                    <div>
+                        <span class="badge">Ексклюзивність</span>
+                        <h2 class="section-title">Унікальний стиль для кожного</h2>
+                        <p class="hero-description">
+                            Наша команда ретельно відбирає кожен елемент колекції, щоб забезпечити найвищу якість та неповторний
+                            стиль. Від класичних силуетів до сучасних трендів.
+                        </p>
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-dot"></div>
+                            <span>Оновлення колекції кожні 3 дні</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-dot secondary"></div>
+                            <span>Преміальна якість з Італії</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-dot"></div>
+                            <span>Люксові матеріали з Китаю</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Приєднуйтесь до нашої спільноти</h2>
+                <p class="cta-description">
+                    Слідкуйте за нашими оновленнями в соціальних мережах та будьте першими, хто дізнається про нові
+                    надходження
+                </p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-secondary">
+                        📷 Instagram
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        🎵 TikTok
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        💬 Telegram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3 class="footer-title">MASKARAD_BOUTIQUE</h3>
+                <p class="footer-description">
+                    Преміальна мода з найкращих куточків світу. Оновлення кожні 3 дні для вашого ідеального стилю.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-link">📷</a>
+                    <a href="#" class="social-link">🎵</a>
+                    <a href="#" class="social-link">💬</a>
+                </div>
+                <div class="footer-bottom">
+                    <p class="footer-copyright">© 2024 MASKARAD_BOUTIQUE. Всі права захищені.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
